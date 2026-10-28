@@ -14,14 +14,13 @@ function createBot() {
     checkTimeoutInterval: 60000
   });
 
-  // Chặn lỗi check phiên bản 26.3 từ Aternos để tránh crash bot
-  bot._client.on('error', (err) => {
-    if (err && err.message && err.message.includes('26.3')) return;
-  });
-
-  bot.on('spawn', () => {
-    console.log('-> Bot da vao server Aternos thanh cong!');
+  // Chỉ báo thành công khi thực sự xuất hiện trong thế giới game
+  bot.once('spawn', () => {
+    console.log('=== > BOT DA VAO SERVER THUC TE THANH CONG! <===');
+    
+    // Treo máy xoay và nhảy chống AFK
     setInterval(() => {
+      if (!bot.entity) return;
       const yaw = Math.random() * Math.PI * 2;
       const pitch = (Math.random() - 0.5) * Math.PI;
       bot.look(yaw, pitch, true);
@@ -31,12 +30,15 @@ function createBot() {
   });
 
   bot.on('end', () => {
-    console.log('-> Bot mat ket noi, dang ket noi lai...');
+    console.log('-> Server dang Tat/Offline hoac bi ngat ket noi. Thu lai sau 15s...');
     setTimeout(createBot, 15000);
   });
 
   bot.on('error', (err) => {
-    if (err && err.message && err.message.includes('26.3')) return;
+    // Thấu kính chặn các thông báo lỗi ảo từ Aternos
+    if (err && err.message && (err.message.includes('26.3') || err.message.includes('ECONNRESET'))) {
+      return;
+    }
     console.log('Loi:', err.message || err);
   });
 }
