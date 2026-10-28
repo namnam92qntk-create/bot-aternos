@@ -8,14 +8,16 @@ app.listen(process.env.PORT || 3000, () => console.log('Webserver ready'));
 function createBot() {
   const bot = mineflayer.createBot({
     host: 'namdeptrai2512.aternos.me',
-    port: 25565,
+    port: 32555,
     username: 'BotAternos247',
-    version: '1.20.6',
+    version: '26.3', // Khai báo chính xác phiên bản 26.3 trên Aternos
     checkTimeoutInterval: 60000
   });
 
   bot.once('spawn', () => {
     console.log('=== > BOT DA VAO SERVER THUC TE THANH CONG! <===');
+    
+    // Treo máy xoay và nhảy chống AFK
     setInterval(() => {
       if (!bot.entity) return;
       const yaw = Math.random() * Math.PI * 2;
@@ -27,14 +29,11 @@ function createBot() {
   });
 
   bot.on('end', () => {
-    console.log('-> Dang ket noi lai sau 15s...');
+    console.log('-> Bot mat ket noi, dang thu lai sau 15s...');
     setTimeout(createBot, 15000);
   });
 
   bot.on('error', (err) => {
-    if (err && err.message && (err.message.includes('26.3') || err.message.includes('ECONNRESET'))) {
-      return;
-    }
     console.log('Loi:', err.message || err);
   });
 }
