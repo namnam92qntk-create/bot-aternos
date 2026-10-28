@@ -11,7 +11,7 @@ function createBot() {
     host: 'namdeptrai2512.aternos.me',
     port: 25565,
     username: 'BotAternos247',
-    version: false
+    version: '1.20.6'
   });
 
   bot.on('spawn', () => {
