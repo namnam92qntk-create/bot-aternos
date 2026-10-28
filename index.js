@@ -11,7 +11,7 @@ function createBot() {
     host: 'namdeptrai2512.aternos.me', // IP Aternos cua ban
     port: 25565,
     username: 'BotAternos247',        // Ten nhan vat Bot
-    version: false
+    version: 26.3
   });
 
   bot.on('spawn', () => {
