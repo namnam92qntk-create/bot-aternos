@@ -8,10 +8,10 @@ app.listen(process.env.PORT || 3000, () => console.log('Webserver ready'));
 
 function createBot() {
   const bot = mineflayer.createBot({
-    host: 'namdeptrai2512.aternos.me', // IP Aternos cua ban
-   port: 25565,
-    username: 'BotAternos247',        // Ten nhan vat Bot
-    version: '1.20.6'
+    host: 'namdeptrai2512.aternos.me',
+    port: 25565,
+    username: 'BotAternos247',
+    version: false
   });
 
   bot.on('spawn', () => {
