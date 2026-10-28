@@ -7,11 +7,12 @@ app.get('/', (req, res) => res.send('Bot Aternos dang chay!'));
 app.listen(process.env.PORT || 3000, () => console.log('Webserver ready'));
 
 function createBot() {
-  const bot = mineflayer.createBot({
+ const bot = mineflayer.createBot({
     host: 'namdeptrai2512.aternos.me',
-    port: 25565,
+    port: 32555,
     username: 'BotAternos247',
-    version: '1.20.6'
+    version: '1.20.6',
+    checkTimeoutInterval: 60000
   });
 
   bot.on('spawn', () => {
