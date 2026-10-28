@@ -10,7 +10,7 @@ function createBot() {
     host: 'namdeptrai2512.aternos.me',
     port: 32555,
     username: 'BotAternos247',
-    version: '26.3', // Khai báo chính xác phiên bản 26.3 trên Aternos
+    version: '1.20.6',
     checkTimeoutInterval: 60000
   });
 
@@ -29,13 +29,21 @@ function createBot() {
   });
 
   bot.on('end', () => {
-    console.log('-> Bot mat ket noi, dang thu lai sau 15s...');
+    console.log('-> Ket noi bi ngat. Dang thu lai sau 15s...');
     setTimeout(createBot, 15000);
   });
 
   bot.on('error', (err) => {
+    // Chặn crash khi Aternos trả về thông báo lỗi 26.3
+    if (err && err.message && err.message.includes('26.3')) return;
     console.log('Loi:', err.message || err);
   });
 }
+
+// Bắt lỗi hệ thống để bot không bao giờ bị sập (Exited with status 1)
+process.on('uncaughtException', (err) => {
+  if (err && err.message && err.message.includes('26.3')) return;
+  console.log('Uncaught Exception:', err.message || err);
+});
 
 createBot();
